@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_top">0dp</dimen>
+
+
+    <!--解决键盘闪烁的-->
+    <dimen name="min_panel_height">220dp</dimen>
+    <dimen name="max_panel_height">380dp</dimen>
+    <dimen name="min_keyboard_height">80dp</dimen>
+
+    <dimen name="def_wheel_width">32dp</dimen>
+    <dimen name="def_shadow_radius">2dp</dimen>
+    <dimen name="def_shadow_offset">2dp</dimen>
+</resources>

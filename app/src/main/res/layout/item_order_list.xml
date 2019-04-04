@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
+    android:background="@color/white_color"
+    android:id="@+id/item"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv1t"
+            style="@style/OrderItemTextStyle"
+            android:text="@string/data1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv2t"
+            style="@style/OrderItemTextStyle"
+            android:text="@string/data2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv3t"
+            style="@style/OrderItemTextStyle"
+            android:text="@string/data3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv4t"
+            style="@style/OrderItemTextStyle"
+            android:text="@string/data4" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl5t"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv5t"
+            style="@style/OrderItemTextStyle"
+            android:text="@string/data5" />
+    </RelativeLayout>
+</LinearLayout>

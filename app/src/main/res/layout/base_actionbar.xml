@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/theme_color"
+    android:id="@+id/base_actionbar"
+    android:padding="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/tv_actionbar_back"
+        android:layout_gravity="bottom"
+        android:drawableLeft="@drawable/tab_icon_return"
+        android:text="返回"
+        android:textSize="17sp"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_actionbar_title"
+        android:textColor="@android:color/white"
+        android:layout_gravity="bottom|center"
+        android:textSize="18sp"
+        tools:text="标题"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        tools:src="@mipmap/ic_launcher_round"
+        android:layout_gravity="end|bottom"
+        android:id="@+id/iv_actionbar_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_actionbar_right"
+        android:textColor="@android:color/white"
+        android:layout_gravity="end|bottom"
+        tools:text="右边"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</FrameLayout>

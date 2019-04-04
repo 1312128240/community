@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlackLight">#303030</color>
+    <color name="black_text">#383831</color>
+    <color name="background_color">#f0f0f0</color>
+    <color name="theme_color">#f6382f</color>
+    <color name="white">#ffffff</color>
+    <color name="cant_click_color">#e7e7e7</color>
+    <color name="text_gray">#dcdcdc</color>
+    <color name="order_item_red">#fe0036</color>
+    <color name="order_item_detail_text_n">#2f2f2f</color>
+    <color name="home_text_color">#0a0a0a</color>
+    <color name="base_color">#f4f4f4</color>
+    <color name="order_item_detail_text">#252525</color>
+    <color name="order_title_text">#838383</color>
+    <color name="order_item_text">#333333</color>
+    <color name="order_item_detail_gray">#9e8f8f</color>
+    <color name="order_item_detail_button">#4f4f4f</color>
+    <color name="order_item_detail_pay_status">#777777</color>
+    <color name="task_un_select_tab">#c2c2c2</color>
+    <color name="task_dialog_text">#918f8f</color>
+    <color name="search_text_color">#999999</color>
+    <color name="pull_down_color">#1e1e1e</color>
+    <color name="dialog_et_color">#d1d1d1</color>
+    <color name="finance_item_gray">#adadad</color>
+    <color name="cant_click_text_color">#a6a6a6</color>
+    <color name="password_mistake_color">#8e8e8e</color>
+    <color name="service_time_color">#b4b3b3</color>
+    <color name="service_handle_et">#d9d9d9</color>
+    <color name="handle_choose">#353535</color>
+    <color name="handle_un_choose">#a0a0a0</color>
+    <color name="color_notice">#EEEE00</color>
+
+    <!--黑色文字-->
+    <color name="black_color">#383831</color>
+    <!--白色-->
+    <color name="white_color">#ffffff</color>
+    <!--中间间隔线颜色-->
+    <color name="line_color">#f0f0f0</color>
+</resources>

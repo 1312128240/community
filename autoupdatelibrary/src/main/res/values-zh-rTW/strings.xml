@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_btn_cancel">取消</string>
+    <string name="update_btn_confirm">確定</string>
+    <string name="update_install_text">安裝</string>
+    <string name="update_install_now_text">立即安裝</string>
+    <string name="update_network_error">網絡錯誤</string>
+    <string name="update_new_version_tips">新版本，歡迎更新</string>
+    <string name="update_find_new_version">發現新版本</string>
+    <string name="update_now">立即更新</string>
+    <string name="update_next_time">下次再說</string>
+    <string name="update_apply_storage_rights">申請存儲許可權</string>
+    <string name="update_tips">提示</string>
+    <string name="update_not_wifi_tips">當前處於非WIFI連接，是否繼續？</string>
+    <string name="update_no_sd_card">沒有掛載的SD卡</string>
+    <string name="update_download_url_empty">下載地址為空</string>
+    <string name="update_file_create_fail">apk檔案創建失敗</string>
+    <string name="update_download_fail">下載失敗</string>
+    <string name="update_network_error_download_fail">網絡异常，下載失敗</string>
+    <string name="update_version_download_complete">版本下載完成</string>
+    <string name="update_updating">正在更新</string>
+
+</resources>

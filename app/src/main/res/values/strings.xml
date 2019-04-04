@@ -1,0 +1,203 @@
+<resources>
+
+    <string name="app_name">邻阿姨社区端</string>
+    <string name="home_order">订单</string>
+    <string name="home_task">任务</string>
+    <string name="home_report_form">经营报表</string>
+    <string name="home_goods_receipt">收货</string>
+    <string name="home_packing">装箱</string>
+    <string name="home_goods_send">配送</string>
+    <string name="home_finance">财务管理</string>
+    <string name="home_account_number">账号设置</string>
+    <string name="home_customer_service">售后处理</string>
+    <string name="home_notice">通知消息</string>
+
+    <string name="login">登录</string>
+    <string name="find_password">找回密码</string>
+    <string name="send_vcode_success">验证码发送成功</string>
+
+    <string name="then_click_one_exit_procedure">再按一次退出程序</string>
+
+    <string name="area_text">地区</string>
+    <string name="select_area">请选择地区</string>
+    <string name="delete">删除</string>
+    <string name="cancel_text">取消</string>
+    <string name="confirm_text">确定</string>
+    <string name="take_photos">拍照</string>
+    <string name="my_photo_albums">我的相册选择</string>
+    <string name="report_success">举报光荣</string>
+    <string name="title">标题</string>
+    <string name="advert_detail">详情</string>
+    <string name="system_message">系统消息</string>
+    <string name="select_get">选取</string>
+    <string name="max_length">字数不能超过%1$s个字</string>
+    <string name="network_anomaly">无法连接服务，请检查网络或重试</string>
+
+    <string name="weChat">微信</string>
+    <string name="friends_circle">朋友圈</string>
+    <string name="weibo_text">微博</string>
+    <string name="qq_text">QQ</string>
+    <string name="qq_zone">QQ空间</string>
+
+    <string name="is_login">是否立即登录？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+
+    <string name="tips">提示</string>
+    <string name="forced_login_out_tips">您的账号在另一台设备上登录,您被迫下线！</string>
+    <string name="know_text">知道了</string>
+    <string name="forced_login_token_error_tips">您的账号已过期，请重新登录！</string>
+
+    <string name="order_check">订单查看</string>
+    <string name="order_detail">订单详情</string>
+    <string name="order_new">新订单</string>
+    <string name="order_all">全部订单</string>
+    <string name="order_buying">采买中</string>
+    <string name="order_sending">送货中</string>
+    <string name="order_receive">已收货</string>
+    <string name="order_cancel">已取消</string>
+
+    <string name="data1">数据1</string>
+    <string name="data2">数据2</string>
+    <string name="data3">数据3</string>
+    <string name="data4">数据4</string>
+    <string name="data5">数据5</string>
+
+    <string name="data_day">24日</string>
+    <string name="data_week">第二周</string>
+    <string name="data_month">11月</string>
+    <string name="v1">1358.00</string>
+    <string name="v2">152.00</string>
+    <string name="v3">132.00</string>
+    <string name="v4">999.00</string>
+    <string name="v5">5481.00</string>
+
+    <string name="back">返回</string>
+
+    <string name="task_space">任务空间</string>
+    <string name="task_in_execution">进行中任务</string>
+    <string name="task_rob">抢任务</string>
+    <string name="task_appoint">指定任务</string>
+    <string name="task_finished">已完成任务</string>
+
+    <string name="task_type_buy">采买任务</string>
+    <string name="task_type_send">配送任务</string>
+
+    <string name="report_form">经营报表</string>
+    <string name="report_form_day">日报表</string>
+    <string name="report_form_week">周报表</string>
+    <string name="report_form_month">月报表</string>
+
+    <string name="goods_in_out">收货出货</string>
+    <string name="goods_in">收货</string>
+    <string name="goods_binning">装箱</string>
+    <!--<string name="goods_in_buy">买手收货</string>-->
+    <string name="goods_in_buy">收货</string>
+    <string name="goods_in_details">收货详情</string>
+    <string name="goods_in_exchange">流转收货</string>
+    <string name="goods_send_out">配送出货</string>
+    <string name="goods_out_send">出货</string>
+    <string name="goods_out_exchange">流转出货</string>
+
+    <string name="a1">A1</string>
+    <string name="a2">A2</string>
+    <string name="a3">A3</string>
+    <string name="a4">A4</string>
+    <string name="a5">A5</string>
+
+    <string name="sort_and_pack">分拣装箱</string>
+    <string name="sorting">分拣</string>
+    <string name="packing">装箱</string>
+    <string name="packing_details">装箱详情</string>
+
+    <string name="finance">财务管理</string>
+    <string name="finance_detail">明细</string>
+    <string name="finance_money">余额账户(元)</string>
+    <string name="finance_exchange">充值</string>
+    <string name="finance_withdraw">提现</string>
+    <string name="finance_exchange_title">账号充值</string>
+    <string name="finance_withdraw_title">账号提现</string>
+    <string name="finance_add_bank_card">添加银行卡</string>
+
+    <string name="account_setting">账户设置</string>
+    <string name="head">头像</string>
+    <string name="name">名称</string>
+    <string name="sex">性别</string>
+    <string name="phone">手机</string>
+    <string name="address">住址</string>
+    <string name="password">密码</string>
+
+    <string name="male">男</string>
+    <string name="female">女</string>
+
+    <string name="tip">提醒</string>
+    <string name="exchange_tip">每天充值次数不限，但每次充值金额低于1000元的，收取5元/笔的服务费。</string>
+    <string name="withdraw_tip">社区服务中心账号上的金额可以申请提现，每天提现次数1次，提现金额低于1万元的，收取1%服务费，最低10/元一笔</string>
+    <string name="card_num">卡号</string>
+    <string name="input_car_num">请输入卡号</string>
+    <string name="card_own">用户名</string>
+    <string name="input_card_own">请输入用户名</string>
+    <string name="card_type">卡类型</string>
+    <string name="input_car_type">请输入卡类型</string>
+    <string name="sure">确定</string>
+    <string name="finished_check">验货完毕</string>
+    <string name="cancel">取消</string>
+    <string name="finished">完成</string>
+    <string name="sealing_take_photo">封箱条拍照</string>
+    <string name="input_phone_num_tip">请输入手机号码</string>
+    <string name="input_address_tip">请输入地址</string>
+
+    <string name="customer_service">售后处理</string>
+    <string name="customer_result">处理记录</string>
+    <string name="to_handle">去处理</string>
+    <string name="service_type">售后类型：</string>
+    <string name="customer_detail">处理详情</string>
+    <string name="customer_handle">申请售后</string>
+    <string name="change_success">换货成功</string>
+    <string name="handle_method">处理方式：</string>
+    <string name="handle_reason">处理原因：</string>
+    <string name="handle_explain">处理说明：</string>
+    <string name="please_choose_handle_reason">请选择处理原因</string>
+    <string name="agree_request">同意申请</string>
+    <string name="reject_request">拒绝申请</string>
+    <string name="sure_handle">确认处理</string>
+    <string name="lin_a_yi">邻阿姨</string>
+
+    <string name="notice">通知信息</string>
+    <string name="examine">人工审核</string>
+    <string name="place_order">"下单时间 : "</string>
+    <string name="surplus_time">"剩余时间 : "</string>
+    <string name="get_goods_time">"收货时间 : "</string>
+    <string name="cancel_order_time">"取消时间 : "</string>
+    <string name="str_buyer">"收货人 : "</string>
+    <string name="str_buy_">采买员  :  </string>
+    <string name="remember_password">记住密码</string>
+    <string name="market_name">超市名称 : </string>
+    <string name="goods_all_num">商品总数 : </string>
+    <string name="service_fee">服务费 : </string>
+    <string name="buy_money">采买金额合计 : </string>
+    <string name="receiveSite">所在位置 : </string>
+    <string name="send_address">配送地址 :</string>
+
+    <string name="str_type">类型 :   </string>
+    <string name="str_all_">合计 :   </string>
+
+    <string name="manual_review">人工审核</string>
+
+    <string name="image_load_error">图片加载失败</string>
+    <string name="save_text">保存</string>
+    <string name="save_fail">保存失败</string>
+    <string name="save_success">保存成功</string>
+
+    <string name="str_type_name">售后类型</string>
+    <string name="str_back_money">退款金额</string>
+    <string name="str_cause_name">售后原因</string>
+    <string name="str_request_time">申请时间</string>
+    <string name="str_failure_case">失败原因</string>
+    <string name="str_content">售后说明</string>
+    <string name="str_upload_img">上传图片</string>
+    <string name="str_judge">判定</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

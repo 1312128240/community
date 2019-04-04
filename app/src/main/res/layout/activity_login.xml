@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingBottom="10dp"
+        android:background="@color/theme_color"
+        android:gravity="center|bottom"
+        android:text="@string/login"
+        android:textColor="@color/white_color"
+        android:textSize="17sp" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/white_color"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="21.5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/iphon_icon" />
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="11.5dp"
+            android:layout_marginRight="11.5dp"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:textColorHint="@color/text_gray"
+            android:textSize="15sp" />
+
+
+        <ImageView
+            android:id="@+id/phone_clear"
+            android:layout_width="30.4dp"
+            android:layout_height="30.4dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/yijianshanchu"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ll_username"
+        android:layout_marginBottom="13dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white_color"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <ImageView
+            android:layout_width="14.9dp"
+            android:layout_height="20.2dp"
+            android:layout_gravity="center"
+            android:src="@drawable/mima_icon" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="11.5dp"
+            android:layout_marginRight="11.5dp"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:textColorHint="@color/text_gray"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/password_clear"
+            android:visibility="invisible"
+            android:layout_width="30.4dp"
+            android:layout_height="30.4dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:src="@drawable/yijianshanchu" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_click"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_alignLeft="@+id/ll_password"
+        android:layout_below="@+id/ll_password"
+        android:layout_gravity="center"
+        android:src="@drawable/weixuanze_icon" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_password"
+        android:layout_toRightOf="@+id/iv_click"
+        android:paddingLeft="14dp"
+        android:paddingTop="3dp"
+        android:text="@string/remember_password"
+        android:textColor="@color/order_item_detail_text_n" />
+
+
+    <TextView
+        android:id="@+id/tv_find_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/ll_password"
+        android:layout_below="@+id/ll_password"
+        android:paddingTop="3dp"
+        android:text="@string/find_password" />
+
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_click"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_bg_can_click_3"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="登录"
+        android:textColor="@color/white_color" />
+
+
+</RelativeLayout>

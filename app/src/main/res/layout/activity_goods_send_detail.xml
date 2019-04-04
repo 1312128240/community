@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_actionbar"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="-11.4dp"
+            tools:text="下单时间：11-11 11:11"
+            android:textColor="@color/black_color" />
+        <TextView
+            android:id="@+id/tv_ordersId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:paddingTop="10dp"
+            tools:text="订单编号：0000"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/tv_buyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ordersId"
+            android:layout_marginTop="8.6dp"
+            tools:text="收货人：张三 1353254862"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_buyer"
+            android:layout_marginTop="8.6dp"
+            android:layout_marginBottom="8.6dp"
+            android:lineSpacingExtra="3dp"
+            android:maxLines="2"
+            tools:text="配送地址：泰然九路11号"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/tv_second_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="-11.4dp"
+            tools:text="剩余时间：00:11:11"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_below="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="配送箱号：0000"
+            android:textColor="@color/black_color" />
+        <TextView
+            android:id="@+id/tv_goods_num"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="数量：4件"
+            android:textColor="@color/black_color" />
+        <ImageView
+            android:id="@+id/iv_take_photo"
+            android:layout_below="@+id/tv_address"
+            android:layout_width="24dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/icon_photograph" />
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_address"
+            android:layout_toStartOf="@id/iv_take_photo"
+            android:text="封箱条拍照"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black_color" />
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <FrameLayout
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white_color">
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="74.4dp"
+            android:layout_height="27.8dp"
+            android:gravity="center"
+            android:layout_gravity="end|center"
+            android:textColor="@color/theme_color"
+            android:text="确认封箱"
+            android:background="@drawable/button_bg_5_rob"
+            tools:ignore="UnknownIdInLayout" />
+    </FrameLayout>
+
+</LinearLayout>
