@@ -177,45 +177,6 @@ public class TaskingFragment extends BaseFragments {
                         }
                     }
                 });
-       /* OkHttpUtils.getInstance().GetData("procurement/procurement/getProcurementList.do", map, new ResponeCallBack() {
-            @Override
-            public void onSuccess(String response) {
-                //刷新完成
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-                final ProcurementBean bean = new Gson().fromJson(response, ProcurementBean.class);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if("S".equals(bean.getRespCode())){
-                            totalPageBuy = bean.getData().getTotalPage();
-                            final List<ProcurementBean.DataBeanX.DataBean> tempLists = bean.getData().getData();
-                            adapter1.add(tempLists,isRefresh);
-                        }else {
-                            if(bean.getErrorMsg().contains("accessToken失效")){
-                                taskHomeActivity.showLogOutDialog();
-                            }else {
-                                ToastUtil.showShort(getContext(),bean.getErrorMsg());
-                            }
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onError(String err_msg) {
-                //刷新完成
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-
-            @Override
-            public void onFailure(String fail_msg) {
-                //刷新完成
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
-            }
-        });*/
     }
 
 
@@ -308,7 +269,7 @@ public class TaskingFragment extends BaseFragments {
                             currentPage++;
                             RefreshProcurement(false);
                         } else {
-                            ToastUtil.showShort(getContext(), "加载完毕");
+                            ToastUtil.showShort(getContext(), "全部加载完毕");
                             refreshLayout.finishLoadMore();
                         }
 
@@ -318,7 +279,7 @@ public class TaskingFragment extends BaseFragments {
                             currentPage++;
                             RefreshDelivery(false);
                         } else {
-                            ToastUtil.showShort(getContext(), "加载完毕");
+                            ToastUtil.showShort(getContext(), "全部加载完毕");
                             refreshLayout.finishLoadMore();
                         }
 

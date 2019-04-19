@@ -14,6 +14,7 @@ import com.chanxa.linayi.uis.Binning.BinningActivity;
 import com.chanxa.linayi.uis.Delivery.DeliveryActivity;
 import com.chanxa.linayi.uis.Order.OrderStatusActivity;
 import com.chanxa.linayi.uis.Personal.SettingActivity;
+import com.chanxa.linayi.uis.Receiving.ReceivActivity;
 import com.chanxa.linayi.uis.Receiving.ReceivingActivity;
 import com.chanxa.linayi.uis.Task.TaskHomeActivity;
 
@@ -70,7 +71,8 @@ public class HomeRcvAdapter extends RecyclerView.Adapter<HomeRcvAdapter.MyViewHo
                        mContext.startActivity(new Intent(mContext, TaskHomeActivity.class));
                        break;
                    case 2:
-                       mContext.startActivity(new Intent(mContext, ReceivingActivity.class));
+                     //  mContext.startActivity(new Intent(mContext, ReceivingActivity.class));
+                       mContext.startActivity(new Intent(mContext,ReceivActivity.class));
                        break;
                    case 3: //装箱
                        mContext.startActivity(new Intent(mContext, BinningActivity.class));

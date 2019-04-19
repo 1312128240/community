@@ -95,41 +95,6 @@ public class OkhttpUtil {
                    }
             }
         });
-       /*  okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call,final IOException e) {
-
-                 mHandler.post(new Runnable() {
-                     @Override
-                     public void run() {
-                        responeCallBack.onFailure(e.toString());
-                     }
-                 });
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-
-                if(response.code()==200){
-                    final String jsonstr=response.body().string();
-                  ;
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            responeCallBack.onSuccess(jsonstr);
-                        }
-                    });
-                }else {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            responeCallBack.onError("响应码"+response.code());
-                        }
-                    });
-                }
-
-            }
-        });*/
 
     }
 

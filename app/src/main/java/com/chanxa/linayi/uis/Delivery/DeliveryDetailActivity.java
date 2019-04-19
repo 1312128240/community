@@ -85,7 +85,7 @@ public class DeliveryDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        tv_title.setText("新配送详情");
+        tv_title.setText("配送详情");
         boxNo = getIntent().getStringExtra("boxNo");
         ordersId = getIntent().getIntExtra("ordersId", 0);
         initRecy();
@@ -182,7 +182,6 @@ public class DeliveryDetailActivity extends BaseActivity {
             @Override
             public void onSuccess(SealBox response) {
                 showToast(response.getData());
-              //  showToast("封箱成功");
                 finish();
             }
 
@@ -197,6 +196,7 @@ public class DeliveryDetailActivity extends BaseActivity {
             }
         },uriFile,ordersId,boxNo);
     }
+
 
     private void check() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED

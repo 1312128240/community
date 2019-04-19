@@ -15,10 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiRequest {
 
     //请求HOST
-   public final static String REQUEST_HOST = "http://www.laykj.cn/wherebuyAPI/";      //外网
-   //  public final static String REQUEST_HOST="http://192.168.0.6:8080/wherebuyAPI/";     //2019/3/27内网
+  // public final static String REQUEST_HOST = "http://www.laykj.cn/wherebuyAPI/";      //外网
+    public final static String REQUEST_HOST="http://192.168.0.6:8080/wherebuyAPI/";     //2019/3/27内网
  //  public static final String REQUEST_HOST="http://192.168.0.134:8080/linayi/";  //高雄内网
-
     private Retrofit retrofit;
     private static ApiRequest apiRequestInstance;
 

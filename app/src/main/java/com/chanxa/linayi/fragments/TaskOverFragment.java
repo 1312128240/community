@@ -179,43 +179,6 @@ public class TaskOverFragment extends BaseFragments{
                         }
                     }
                 });
-      /*  OkHttpUtils
-                .getInstance()
-                .GetData("procurement/procurement/getProcurementList.do", map, new ResponeCallBack() {
-                    @Override
-                    public void onSuccess(String strJson) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-                        final ProcurementBean bean = new Gson().fromJson(strJson, ProcurementBean.class);
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if("S".equals(bean.getRespCode())){
-                                    totalPageBuy= bean.getData().getTotalPage();
-                                    final List<ProcurementBean.DataBeanX.DataBean> tempList=bean.getData().getData();
-                                    adapter1.add(tempList,isRefresh);
-                                }else {
-                                    if(bean.getErrorMsg().contains("accessToken失效")){
-                                        taskHomeActivity.showLogOutDialog();
-                                    }else {
-                                        ToastUtil.showShort(getContext(),bean.getErrorMsg());
-                                    }
-                                }
-                            }
-                        });
-                    }
-                    @Override
-                    public void onError(String err_msg) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-                    }
-
-                    @Override
-                    public void onFailure(String fail_msg) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-                    }
-                });*/
     }
 
     /**
@@ -253,45 +216,6 @@ public class TaskOverFragment extends BaseFragments{
                         }
                     }
                 });
-       /* OkHttpUtils
-                .getInstance()
-                .GetData("delivery/deliveryList.do", map, new ResponeCallBack() {
-                    @Override
-                    public void onSuccess(String strJson) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-
-                     final TaskDeliveryBean bean= new Gson().fromJson(strJson,TaskDeliveryBean.class);
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if("S".equals(bean.getRespCode())){
-                                    totalPageDelivery = bean.getData().getTotalPage();
-                                    final List<TaskDeliveryBean.DataBeanX.DataBean> tempList=bean.getData().getData();
-                                    adapter2.add(tempList,isRefresh);
-                                }else {
-                                    if(bean.getErrorMsg().contains("accessToken失效")){
-                                        taskHomeActivity.showLogOutDialog();
-                                    }else {
-                                        ToastUtil.showShort(getContext(),bean.getErrorMsg());
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(String err_msg) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-                    }
-
-                    @Override
-                    public void onFailure(String fail_msg) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
-                    }
-                });*/
     }
 
 

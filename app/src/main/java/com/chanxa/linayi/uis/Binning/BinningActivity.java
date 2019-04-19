@@ -54,6 +54,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
          initRecy();
     }
 
+
     private void initRecy() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<BinningBean.DataBeanX.DataBean> beanList=new ArrayList<>();
@@ -130,7 +131,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
               Refresh(false);
           }else {
               refreshLayout.finishLoadMore();
-              ToastUtil.showShort(this,"全部加毕");
+              ToastUtil.showShort(this,"全部加载完毕");
           }
     }
 
