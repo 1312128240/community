@@ -46,13 +46,23 @@ public class TaskingFragment extends BaseFragments {
     RecyclerView recyclerView_buy;
     @BindView(R.id.recy_tasking_dispatching)
     RecyclerView recyclerView_dispatching;
-    @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
+
+    @BindView(R.id.refreshLayout1)
+    SmartRefreshLayout refreshLayout1;
+    @BindView(R.id.refreshLayout2)
+    SmartRefreshLayout refreshLayout2;
+
+    @BindView(R.id.empty1)
+    View emptp1;
+    @BindView(R.id.empty2)
+    View emptp2;
+
     private int currentPage = 1;
     private int totalPageBuy;
+
     private int currentPage2 = 1;
     private int totalPageDispatching;
-    private int tabIsCheck;
+
     public MyCommonAdapter<ProcurementBean.DataBeanX.DataBean> adapter1;
     private MyCommonAdapter<TaskDeliveryBean.DataBeanX.DataBean> adapter2;
     private TaskHomeActivity taskHomeActivity;
@@ -156,18 +166,29 @@ public class TaskingFragment extends BaseFragments {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         ToastUtil.showShort(getContext(),e.toString());
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
+                        refreshLayout1.finishRefresh();
+                        refreshLayout1.finishLoadMore();
                     }
 
                     @Override
                     public void onResponse(Call call, ProcurementBean bean) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
+                        refreshLayout1.finishRefresh();
+                        refreshLayout1.finishLoadMore();
                         if("S".equals(bean.getRespCode())){
                             totalPageBuy = bean.getData().getTotalPage();
                             final List<ProcurementBean.DataBeanX.DataBean> tempLists = bean.getData().getData();
                             adapter1.add(tempLists,isRefresh);
+
+                            if(isRefresh){
+                                if(tempLists.size()==0){
+                                  //  refreshLayout.setVisibility(View.GONE);
+                                    emptp1.setVisibility(View.VISIBLE);
+                                }else {
+                                  //  refreshLayout.setVisibility(View.VISIBLE);
+                                    emptp1.setVisibility(View.GONE);
+                                }
+                            }
+
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 taskHomeActivity.showLogOutDialog();
@@ -193,18 +214,28 @@ public class TaskingFragment extends BaseFragments {
                 .PostAsync("delivery/deliveryList.do", map, new ResultCallback<TaskDeliveryBean>() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
+                        refreshLayout2.finishRefresh();
+                        refreshLayout2.finishLoadMore();
                     }
 
                     @Override
                     public void onResponse(Call call, TaskDeliveryBean bean) {
-                        refreshLayout.finishRefresh();
-                        refreshLayout.finishLoadMore();
+                        refreshLayout2.finishRefresh();
+                        refreshLayout2.finishLoadMore();
                         if("S".equals(bean.getRespCode())){
                             totalPageDispatching = bean.getData().getTotalPage();
                             final List<TaskDeliveryBean.DataBeanX.DataBean> tempLists = bean.getData().getData();
                             adapter2.add(tempLists,isRefresh);
+
+                            if(isRefresh){
+                                if(tempLists.size()==0){
+                                    //refreshLayout.setVisibility(View.GONE);
+                                    emptp2.setVisibility(View.VISIBLE);
+                                }else {
+                                    //refreshLayout.setVisibility(View.VISIBLE);
+                                    emptp2.setVisibility(View.GONE);
+                                }
+                            }
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 taskHomeActivity.showLogOutDialog();
@@ -224,24 +255,17 @@ public class TaskingFragment extends BaseFragments {
                 int position = tab.getPosition();
                 if (position == 0) {
 
-                    tabIsCheck = 0;
-
                     tv_tasking_number.setText("任务编号");
                     tv_tasking_person.setText("采买员");
-                    recyclerView_buy.setVisibility(View.VISIBLE);
-                    recyclerView_dispatching.setVisibility(View.GONE);
+                    refreshLayout1.setVisibility(View.VISIBLE);
+                    refreshLayout2.setVisibility(View.GONE);
 
                 } else if (position == 1) {
-
-                    tabIsCheck = 1;
-
                     tv_tasking_number.setText("订单编号");
                     tv_tasking_person.setText("配送员");
 
-                    recyclerView_buy.setVisibility(View.GONE);
-                    recyclerView_dispatching.setVisibility(View.VISIBLE);
-
-
+                    refreshLayout1.setVisibility(View.GONE);
+                    refreshLayout2.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -260,45 +284,43 @@ public class TaskingFragment extends BaseFragments {
 
 
         //刷新或加载更多
-        refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+        refreshLayout1.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                switch (tabIsCheck) {
-                    case 0:
-                        if (currentPage < totalPageBuy) {
-                            currentPage++;
-                            RefreshProcurement(false);
-                        } else {
-                            ToastUtil.showShort(getContext(), "全部加载完毕");
-                            refreshLayout.finishLoadMore();
-                        }
-
-                        break;
-                    case 1:
-                        if (currentPage2 < totalPageDispatching) {
-                            currentPage++;
-                            RefreshDelivery(false);
-                        } else {
-                            ToastUtil.showShort(getContext(), "全部加载完毕");
-                            refreshLayout.finishLoadMore();
-                        }
-
-                        break;
+                if (currentPage < totalPageBuy) {
+                    currentPage++;
+                    RefreshProcurement(false);
+                } else {
+                    ToastUtil.showShort(getContext(), "全部加载完毕");
+                    refreshLayout.finishLoadMore();
                 }
+
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                switch (tabIsCheck) {
-                    case 0:
-                        currentPage = 1;
-                        RefreshProcurement(true);
-                        break;
-                    case 1:
-                        currentPage2 = 1;
-                        RefreshDelivery(true);
-                        break;
+                currentPage = 1;
+                RefreshProcurement(true);
+            }
+        });
+
+        refreshLayout2.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                if (currentPage2 < totalPageDispatching) {
+                    currentPage2++;
+                    RefreshDelivery(false);
+                } else {
+                    ToastUtil.showShort(getContext(), "全部加载完毕");
+                    refreshLayout.finishLoadMore();
                 }
+
+            }
+
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                currentPage2 = 1;
+                RefreshDelivery(true);
             }
         });
 

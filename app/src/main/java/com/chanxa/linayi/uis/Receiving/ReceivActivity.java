@@ -45,6 +45,8 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshlayout;
 
+    @BindView(R.id.emptylayout)
+    View emptyView;
     private int currentPage=1;
     private int totalPage=0;
     private MyCommonAdapter<ReceivBean.DataBeanX.DataBean> adapter;
@@ -120,7 +122,6 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                //确认收货
                 inspectionComplete(taskId);
             }
         });
@@ -134,9 +135,53 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
         dialog.create().show();
     }
 
+
+
+    private void Refresh(final boolean isRefresh) {
+        Map<String,String> map=new HashMap<>();
+        map.put("currentPage",currentPage+"");
+        map.put("pageSize","10");
+        OkhttpUtil
+                .getmIntance()
+                .seTag(this)
+                .PostAsync("procurement/procurement/getProcurementTask.do", map, new ResultCallback<ReceivBean>() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        refreshlayout.finishRefresh();
+                        refreshlayout.finishLoadMore();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, ReceivBean bean) {
+                        refreshlayout.finishRefresh();
+                        refreshlayout.finishLoadMore();
+                        if("S".equals(bean.getRespCode())){
+                            totalPage=bean.getData().getTotalPage();
+                            final List<ReceivBean.DataBeanX.DataBean> tempList=bean.getData().getData();
+                            adapter.add(tempList,isRefresh);
+                            if(isRefresh){
+                                if(tempList.size()==0){
+                                   // refreshlayout.setVisibility(View.GONE);
+                                    emptyView.setVisibility(View.VISIBLE);
+                                }else {
+                                   //  refreshlayout.setVisibility(View.VISIBLE);
+                                   emptyView.setVisibility(View.GONE);
+                                }
+                            }
+                        }else {
+                            if(bean.getErrorMsg().contains("accessToken失效")){
+                                showLogOutDialog();
+                            }else {
+                                ToastUtil.showShort(ReceivActivity.this,bean.getErrorMsg());
+                            }
+                        }
+                    }
+                });
+    }
+
+
     //确认收货
     private void inspectionComplete(String taskId) {
-
         Map<String,String> map=new HashMap<>();
         map.put("procurementTaskIdList",taskId);
 
@@ -165,38 +210,6 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
                 });
     }
 
-    private void Refresh(final boolean isRefresh) {
-        Map<String,String> map=new HashMap<>();
-        map.put("currentPage",currentPage+"");
-        map.put("pageSize","10");
-        OkhttpUtil
-                .getmIntance()
-                .seTag(this)
-                .PostAsync("procurement/procurement/getProcurementTask.do", map, new ResultCallback<ReceivBean>() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        refreshlayout.finishRefresh();
-                        refreshlayout.finishLoadMore();
-                    }
-
-                    @Override
-                    public void onResponse(Call call, ReceivBean bean) {
-                        refreshlayout.finishRefresh();
-                        refreshlayout.finishLoadMore();
-                        if("S".equals(bean.getRespCode())){
-                            totalPage=bean.getData().getTotalPage();
-                            final List<ReceivBean.DataBeanX.DataBean> tempList=bean.getData().getData();
-                            adapter.add(tempList,isRefresh);
-                        }else {
-                            if(bean.getErrorMsg().contains("accessToken失效")){
-                                showLogOutDialog();
-                            }else {
-                                ToastUtil.showShort(ReceivActivity.this,bean.getErrorMsg());
-                            }
-                        }
-                    }
-                });
-    }
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -215,6 +228,7 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
         currentPage=1;
         Refresh(true);
     }
+
 
     @OnClick(R.id.tv_actionbar_back)
     public void back(){

@@ -75,7 +75,7 @@
 
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/refreshLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -97,17 +97,10 @@
 
             </android.support.v7.widget.RecyclerView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recy_taskover_dispatching"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_fragment_taskover"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include
+                android:id="@+id/empty1"
+                layout="@layout/empty_layout"/>
 
-            </android.support.v7.widget.RecyclerView>
         </FrameLayout>
 
         <com.scwang.smartrefresh.layout.footer.ClassicsFooter
@@ -116,5 +109,41 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recy_taskover_dispatching"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_fragment_taskover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <include
+                android:id="@+id/empty2"
+                layout="@layout/empty_layout"/>
+        </FrameLayout>
+
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

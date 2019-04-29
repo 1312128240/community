@@ -38,6 +38,8 @@ public class DeliveryingFragment extends BaseFragments implements OnRefreshLoadM
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.recy_deliverying)
     RecyclerView recyclerView;
+    @BindView(R.id.emptylayout)
+    View emptyView;
     private int currentPage=1;
     private int totalPage;
     private OrderStatusActivity orderstatusActivity;
@@ -54,7 +56,6 @@ public class DeliveryingFragment extends BaseFragments implements OnRefreshLoadM
         initRecy();
         Refresh(true);
 
-        Log.e("送货中订单","onCreate");
     }
 
 
@@ -116,6 +117,16 @@ public class DeliveryingFragment extends BaseFragments implements OnRefreshLoadM
                             totalPage = bean.getData().getTotalPage();
                             final List<AllOrderBean.DataBeanX.DataBean> tempLists = bean.getData().getData();
                             adapter.add(tempLists,isRefresh);
+
+                            if(isRefresh){
+                                if(tempLists.size()==0){
+                                    refreshLayout.setVisibility(View.GONE);
+                                    emptyView.setVisibility(View.VISIBLE);
+                                }else {
+                                    refreshLayout.setVisibility(View.VISIBLE);
+                                    emptyView.setVisibility(View.GONE);
+                                }
+                            }
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 orderstatusActivity.showLogOutDialog();

@@ -39,6 +39,9 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
     RecyclerView recyclerview;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.emptylayout)
+    View emptyView;
+
     private int currentPage=1;
     private MyCommonAdapter<DeliveryListBean.DataBeanX.DataBean> adpater;
     private int totalPage;
@@ -85,6 +88,16 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
                             List<DeliveryListBean.DataBeanX.DataBean> tempList=bean.getData().getData();
                             totalPage = bean.getData().getTotalPage();
                             adpater.add(tempList,isRefresh);
+
+                            if(isRefresh){
+                                if(tempList.size()==0){
+                                   // refreshLayout.setVisibility(View.GONE);
+                                    emptyView.setVisibility(View.VISIBLE);
+                                }else {
+                                   // refreshLayout.setVisibility(View.VISIBLE);
+                                    emptyView.setVisibility(View.GONE);
+                                }
+                            }
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();

@@ -25,4 +25,6 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+    <include layout="@layout/empty_layout"/>
+
 </FrameLayout>

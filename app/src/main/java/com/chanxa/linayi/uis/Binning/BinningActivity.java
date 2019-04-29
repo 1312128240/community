@@ -38,6 +38,9 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.emptylayout)
+    View emptyView;
+
     private int currentPage=1;
     private MyCommonAdapter<BinningBean.DataBeanX.DataBean> adapter;
     private int totalPage;
@@ -111,6 +114,16 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
                             totalPage = bean.getData().getTotalPage();
                             List<BinningBean.DataBeanX.DataBean> tempList=bean.getData().getData();
                             adapter.add(tempList,isRefresh);
+
+                            if(isRefresh){
+                                if(tempList.size()==0){
+                                  //  refreshLayout.setVisibility(View.GONE);
+                                    emptyView.setVisibility(View.VISIBLE);
+                                }else {
+                                  //  refreshLayout.setVisibility(View.VISIBLE);
+                                    emptyView.setVisibility(View.GONE);
+                                }
+                            }
                         }else{
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();
@@ -121,7 +134,6 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
                     }
                 });
     }
-
 
 
     @Override

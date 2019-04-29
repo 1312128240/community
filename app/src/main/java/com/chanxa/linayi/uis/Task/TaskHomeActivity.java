@@ -1,6 +1,8 @@
 package com.chanxa.linayi.uis.Task;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
@@ -10,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chanxa.linayi.R;
 import com.chanxa.linayi.fragments.TaskOverFragment;
 import com.chanxa.linayi.fragments.TaskingFragment;
+import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.BaseActivity;
 
 import java.util.ArrayList;
@@ -66,12 +70,31 @@ public class TaskHomeActivity extends BaseActivity{
         };
 
         vp.setAdapter(fragmentAdapter);
+
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                 if(position==0){
+                     rb_tasking.setChecked(true);
+                 }else {
+                     rb_taskover.setChecked(true);
+                 }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     private void initRg() {
-
-
-
        rb_tasking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
            @Override
            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

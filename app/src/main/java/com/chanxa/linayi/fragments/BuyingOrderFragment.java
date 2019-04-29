@@ -31,10 +31,12 @@ import butterknife.BindView;
 import okhttp3.Call;
 
 public class BuyingOrderFragment extends BaseFragments implements OnRefreshLoadMoreListener{
-   @BindView(R.id.refreshLayout)
+    @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.recy_buying)
     RecyclerView recyclerView;
+    @BindView(R.id.emptylayout)
+    View emptyView;
     private int currentPage=1;
     private MyCommonAdapter<AllOrderBean.DataBeanX.DataBean> adapter;
     private int totalPage;
@@ -110,6 +112,16 @@ public class BuyingOrderFragment extends BaseFragments implements OnRefreshLoadM
                               totalPage = bean.getData().getTotalPage();
                               final List<AllOrderBean.DataBeanX.DataBean> tempLists = bean.getData().getData();
                               adapter.add(tempLists,isRefresh);
+
+                              if(isRefresh){
+                                  if(tempLists.size()==0){
+                                      refreshLayout.setVisibility(View.GONE);
+                                      emptyView.setVisibility(View.VISIBLE);
+                                  }else {
+                                      refreshLayout.setVisibility(View.VISIBLE);
+                                      emptyView.setVisibility(View.GONE);
+                                  }
+                              }
                           }else {
                               if(bean.getErrorMsg().contains("accessToken失效")){
                                   orderStatusActivity.showLogOutDialog();

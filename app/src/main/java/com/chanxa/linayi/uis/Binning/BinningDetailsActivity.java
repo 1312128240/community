@@ -20,6 +20,7 @@ import com.chanxa.linayi.R;
 import com.chanxa.linayi.bean.MyBean.BaseStringBean;
 import com.chanxa.linayi.bean.MyBean.BinningDetailsBean;
 import com.chanxa.linayi.tools.AppUtils;
+import com.chanxa.linayi.tools.FormatUtils;
 import com.chanxa.linayi.tools.ToastUtil;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
@@ -146,7 +147,7 @@ public class BinningDetailsActivity extends AppCompatActivity{
                 //数量
                 holder.setText(R.id.tv_num,"x"+dataBean.getQuantity());
                 //价格
-                holder.setText(R.id.tv_money,"¥"+dataBean.getPrice());
+                holder.setText(R.id.tv_money,"单价 : ¥"+FormatUtils.format(dataBean.getPrice()+""));
             }
         };
         recyclerView.setAdapter(adapter);

@@ -38,7 +38,8 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
     SmartRefreshLayout refreshlayout;
     @BindView(R.id.recy_all_order)
     RecyclerView recyclerview;
-
+    @BindView(R.id.emptylayout)
+    View emptyView;
     private int currentPage=1;
     private int totalPage;
     private OrderStatusActivity orderStatusActivity;
@@ -124,6 +125,16 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
                             totalPage=bean.getData().getTotalPage();
                             List<AllOrderBean.DataBeanX.DataBean> tempList=bean.getData().getData();
                             adapter.add(tempList,isRefresh);
+
+                            if(isRefresh){
+                                if(tempList.size()==0){
+                                    refreshlayout.setVisibility(View.GONE);
+                                    emptyView.setVisibility(View.VISIBLE);
+                                }else {
+                                    refreshlayout.setVisibility(View.VISIBLE);
+                                    emptyView.setVisibility(View.GONE);
+                                }
+                            }
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 orderStatusActivity.showLogOutDialog();
