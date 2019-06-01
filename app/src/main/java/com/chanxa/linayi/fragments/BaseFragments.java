@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chanxa.linayi.Interface.BasePresenter;
 
@@ -50,7 +51,6 @@ public abstract class BaseFragments extends Fragment {
     /**
      * 防止快速点击
      */
-
     public  boolean isFastClick() {
         boolean flag = false;
         long curClickTime = System.currentTimeMillis();
@@ -60,6 +60,12 @@ public abstract class BaseFragments extends Fragment {
         lastClickTime = curClickTime;
         return flag;
     }
+
+
+    protected void showToast(String msg,int duration) {
+        Toast.makeText(mContext, msg, duration).show();
+    }
+
 
     /**
      * fragment可见的时候操作，取代onResume，且在可见状态切换到可见的时候调用

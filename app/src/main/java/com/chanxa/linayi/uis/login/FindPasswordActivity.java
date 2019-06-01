@@ -206,7 +206,7 @@ public class FindPasswordActivity extends BaseActivity implements FindPasswordCo
 
     @Override
     public void onFindPasswordSuccess() {
-        showToast("修改密码成功");
+        showToast("修改密码成功",0);
         canPost = true;
         finish();
     }
@@ -216,7 +216,7 @@ public class FindPasswordActivity extends BaseActivity implements FindPasswordCo
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                showToast(getString(R.string.send_vcode_success));
+                showToast("验证码发送成功",0);
                 //获取验证成功,倒计时
                 countdownTime();
             }
@@ -225,7 +225,7 @@ public class FindPasswordActivity extends BaseActivity implements FindPasswordCo
 
     @Override
     public void onNullAccount(String tips) {
-        showToast(tips);
+        showToast(tips,0);
     }
 
     @Override
@@ -261,31 +261,31 @@ public class FindPasswordActivity extends BaseActivity implements FindPasswordCo
     public boolean checkMessage() {
         //如果未输入手机号码或邮箱
         if (TextUtils.isEmpty(etPhone.getText().toString())) {
-            showToast("请输入手机号码");
+            showToast("请输入手机号码",0);
             return false;
         }
 
         //如果输入的既不是邮箱也不是手机号码
         if (!AppUtils.isMobileNO(etPhone.getText().toString())) {
-            showToast("请输入正确的手机号码");
+            showToast("请输入正确的手机号码",0);
             return false;
         }
 
         //如果未输入验证码
         if (TextUtils.isEmpty(etCode.getText().toString())) {
-            showToast("请输入验证码");
+            showToast("请输入验证码",0);
             return false;
         }
 
         //如果未输入密码
         if (TextUtils.isEmpty(etPassword.getText().toString())) {
-            showToast("请输入密码");
+            showToast("请输入密码",0);
             return false;
         }
 
         //如果密碼小于6位或大于32位
         if (etPassword.getText().length() < 6 || etPassword.getText().length() > 32 || !AppUtils.isLetterAndNum(etPassword.getText().toString())) {
-            showToast("密码必须为6-32位数字字母组合");
+            showToast("密码必须为6-32位数字字母组合",0);
             return false;
         }
 

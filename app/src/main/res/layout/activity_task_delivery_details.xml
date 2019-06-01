@@ -25,7 +25,6 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="-11.4dp"
             android:textColor="@color/black_color"
             tools:text="下单时间：11-11 11:11" />
 
@@ -34,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_time"
-            android:paddingTop="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black_color"
             tools:text="订单编号：0000" />
 
@@ -43,29 +42,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_ordersId"
-            android:layout_marginTop="8.6dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black_color"
-            tools:text="收货人：张三 1353254862" />
+            tools:text="收  货  人：张三 1353254862" />
 
-        <TextView
-            android:id="@+id/tv_address"
+      <!--  <TextView
+            android:id="@+id/tv_task_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_buyer"
-            android:layout_marginTop="8.6dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black_color"
+            android:text="配送地址：" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_toEndOf="@+id/tv_task_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_buyer"
+            android:layout_marginTop="10dp"
             android:lineSpacingExtra="3dp"
             android:maxLines="2"
             android:textColor="@color/black_color"
-            tools:text="配送地址：泰然九路11号" />
-
+            tools:text="泰然九路11号" />
+-->
         <TextView
             android:id="@+id/tv_totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:paddingTop="-11.4dp"
             android:textColor="@color/black_color"
             tools:text="xx" />
+
     </RelativeLayout>
 
 

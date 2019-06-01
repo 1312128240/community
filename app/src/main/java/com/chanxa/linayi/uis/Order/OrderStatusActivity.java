@@ -35,6 +35,7 @@ public class OrderStatusActivity extends BaseActivity {
 
     private Fragment currentFragment;
     private FragmentTransaction transaction;
+    private FragmentManager manager;
 
     @Override
     public int getLayoutId() {
@@ -46,7 +47,7 @@ public class OrderStatusActivity extends BaseActivity {
         tv_title.setText("订单查看");
         tv1.setText("订单编号");
         tv2.setText("顾客名字");
-        tv3.setText("订单金额");
+        tv3.setText("订单金额(元)");
         initTab();
     }
 
@@ -54,7 +55,7 @@ public class OrderStatusActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                 int index=tab.getPosition();
+                int index=tab.getPosition();
                 switch (index){
                     case 0:
                        addFragment("all");
@@ -97,7 +98,7 @@ public class OrderStatusActivity extends BaseActivity {
 
     private void addFragment(String fTag) {
         //判断这个标签是否存在Fragment对象,如果存在则返回，不存在返回null
-        FragmentManager manager=getSupportFragmentManager();
+        manager = getSupportFragmentManager();
         Fragment fragment =getSupportFragmentManager().findFragmentByTag(fTag);
         // 如果这个fragment不存于栈中
         if (fragment == null) {
@@ -118,16 +119,18 @@ public class OrderStatusActivity extends BaseActivity {
                 transaction.hide(currentFragment);
             }
             transaction.add(R.id.framelayout, fragment, fTag);
+         //   transaction.addToBackStack(null);
             transaction.commit();
             //更新可见
             currentFragment = fragment;
         } else {
-            //如果添加的Fragment已经存在，则将隐藏掉的Fragment再次显示,其余当前
+            //如果添加的Fragment已经存在，则将隐藏掉的Fragment再次显示,
             transaction = manager.beginTransaction();
             transaction.show(fragment);
             transaction.hide(currentFragment);
             //更新可见
             currentFragment = fragment;
+          //  transaction.addToBackStack(null);
             transaction.commit();
         }
 

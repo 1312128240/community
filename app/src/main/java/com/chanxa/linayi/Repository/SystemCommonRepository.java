@@ -3,7 +3,7 @@ package com.chanxa.linayi.Repository;
 
 import android.content.Context;
 
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+import com.chanxa.linayi.HttpClient.ApiResponse;
 import com.chanxa.linayi.Interface.RequestListener;
 import com.chanxa.linayi.Interface.SystemCommonDataSource;
 import com.chanxa.linayi.bean.UserEntity;

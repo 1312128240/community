@@ -10,12 +10,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.ProcurementBean;
-import com.chanxa.linayi.bean.MyBean.TaskDeliveryBean;
-import com.chanxa.linayi.tools.ToastUtil;
+import com.chanxa.linayi.bean.ProcurementBean;
+import com.chanxa.linayi.bean.TaskDeliveryBean;
 import com.chanxa.linayi.uis.Task.TaskDeliveryDetailsActivity;
 import com.chanxa.linayi.uis.Task.TaskHomeActivity;
 import com.chanxa.linayi.uis.Task.TaskProcurementkDetailActivity;
@@ -165,7 +164,7 @@ public class TaskingFragment extends BaseFragments {
                 .PostAsync("procurement/procurement/getProcurementList.do", map, new ResultCallback<ProcurementBean>() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        ToastUtil.showShort(getContext(),e.toString());
+                        showToast(e.toString(),0);
                         refreshLayout1.finishRefresh();
                         refreshLayout1.finishLoadMore();
                     }
@@ -193,7 +192,7 @@ public class TaskingFragment extends BaseFragments {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 taskHomeActivity.showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(getContext(),bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -240,7 +239,7 @@ public class TaskingFragment extends BaseFragments {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 taskHomeActivity.showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(getContext(),bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -291,7 +290,7 @@ public class TaskingFragment extends BaseFragments {
                     currentPage++;
                     RefreshProcurement(false);
                 } else {
-                    ToastUtil.showShort(getContext(), "全部加载完毕");
+                    showToast("全部加载完毕",0);
                     refreshLayout.finishLoadMore();
                 }
 
@@ -311,7 +310,7 @@ public class TaskingFragment extends BaseFragments {
                     currentPage2++;
                     RefreshDelivery(false);
                 } else {
-                    ToastUtil.showShort(getContext(), "全部加载完毕");
+                    showToast("全部加载完毕",0);
                     refreshLayout.finishLoadMore();
                 }
 

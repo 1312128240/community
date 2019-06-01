@@ -8,11 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.BinningBean;
-import com.chanxa.linayi.tools.ToastUtil;
+import com.chanxa.linayi.bean.BinningBean;
 import com.chanxa.linayi.uis.BaseActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -67,7 +66,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
                 //收货人名字
                 holder.setText(R.id.tv1t,dataBean.getReceiverName());
                 //数量
-                holder.setText(R.id.tv2t,dataBean.getQuantity()+"");
+                holder.setText(R.id.tv2t,dataBean.getActualQuantity()+"");
                 //小区名称
                 holder.setText(R.id.tv3t,dataBean.getAddressTwo());
 
@@ -84,6 +83,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
         };
         recyclerView.setAdapter(adapter);
     }
+
 
     @Override
     protected void onResume() {
@@ -128,7 +128,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(BinningActivity.this,bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -143,7 +143,7 @@ public class BinningActivity extends BaseActivity implements OnRefreshLoadMoreLi
               Refresh(false);
           }else {
               refreshLayout.finishLoadMore();
-              ToastUtil.showShort(this,"全部加载完毕");
+              showToast("全部加载完毕",0);
           }
     }
 

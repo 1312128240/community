@@ -2,7 +2,7 @@
 package com.chanxa.linayi.Interface;
 
 
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+import com.chanxa.linayi.HttpClient.ApiResponse;
 
 public interface RequestFailListener {
 

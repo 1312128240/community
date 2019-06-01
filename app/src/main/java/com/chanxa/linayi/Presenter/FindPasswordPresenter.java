@@ -18,7 +18,7 @@ import java.util.Map;
 
 
 
-public class FindPasswordPresenter extends BaseImlPresenter implements FindPasswordContact.Presenter{
+public class FindPasswordPresenter implements FindPasswordContact.Presenter{
 
     public static final String TAG = "OrderListPresenter";
 

@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+import com.chanxa.linayi.HttpClient.ApiResponse;
 import com.chanxa.linayi.Interface.RequestFailListener;
 import com.chanxa.linayi.Interface.RequestListener;
 import com.google.gson.Gson;

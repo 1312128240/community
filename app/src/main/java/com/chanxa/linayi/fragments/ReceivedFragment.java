@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.AllOrderBean;
-import com.chanxa.linayi.tools.ToastUtil;
-import com.chanxa.linayi.uis.Order.OrderDetailNewActivity;
+
+import com.chanxa.linayi.bean.AllOrderBean;
+import com.chanxa.linayi.uis.Order.OrderDetailsActivity;
 import com.chanxa.linayi.uis.Order.OrderStatusActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -86,7 +86,7 @@ public class ReceivedFragment extends BaseFragments implements OnRefreshLoadMore
                 holder.getView(R.id.item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getActivity(), OrderDetailNewActivity.class);
+                        Intent intent=new Intent(getActivity(), OrderDetailsActivity.class);
                         intent.putExtra("ordersId",dataBean.getOrdersId());
                         startActivity(intent);
                     }
@@ -99,8 +99,10 @@ public class ReceivedFragment extends BaseFragments implements OnRefreshLoadMore
     private void Refresh(final boolean isRefresh) {
         Map<String,String> map=new HashMap<>();
         map.put("communityStatus", "DELIVER_FINISHED");
+        map.put("communityName","community");
         map.put("currentPage", currentPage + "");
         map.put("pageSize",10+"");
+
         OkhttpUtil
                 .getmIntance()
                 .seTag(this)
@@ -135,7 +137,7 @@ public class ReceivedFragment extends BaseFragments implements OnRefreshLoadMore
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 orderStatusActivity.showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(getContext(),bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -148,8 +150,8 @@ public class ReceivedFragment extends BaseFragments implements OnRefreshLoadMore
              currentPage++;
              Refresh(false);
          }else {
-             ToastUtil.showShort(getContext(),"全部加载完毕");
              refreshlayout.finishLoadMore();
+             showToast("全部加载完毕",0);
          }
     }
 

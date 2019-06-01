@@ -4,7 +4,6 @@ import android.os.Process;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -12,18 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chanxa.linayi.App;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.Repository.UserRepository;
-import com.chanxa.linayi.bean.MyBean.LoginBean;
+
+import com.chanxa.linayi.bean.LoginBean;
 import com.chanxa.linayi.tools.ActivityManagerUtils;
 import com.chanxa.linayi.tools.AppUtils;
 import com.chanxa.linayi.tools.SPUtils;
-import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.BaseActivity;
 import com.chanxa.linayi.uis.MainActivity;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,7 +35,7 @@ public class LoginActivity extends BaseActivity{
 
     @BindView(R.id.tv_login)
     TextView tvLogin;
-    UserRepository userRepository;
+   // UserRepository userRepository;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.et_phone)
@@ -65,7 +62,7 @@ public class LoginActivity extends BaseActivity{
 
     @Override
     public void initView() {
-        userRepository = new UserRepository(LoginActivity.this);
+     //   userRepository = new UserRepository(LoginActivity.this);
         if (SPUtils.isLogin(this)) {
             startActivitys(MainActivity.class);
             finish();
@@ -143,7 +140,7 @@ public class LoginActivity extends BaseActivity{
                                startActivitys(MainActivity.class);
                                finish();
                            }else {
-                               ToastUtil.showShort(App.getInstance(),loginBean.getErrorMsg());
+                               showToast(loginBean.getErrorMsg(),0);
                            }
                        }
                    });
@@ -154,17 +151,17 @@ public class LoginActivity extends BaseActivity{
 
     public boolean checkMessage() {
         if (etPhone.getText().length() == 0) {
-            showToast("请输入手机号码");
+            showToast("请输入手机号码",0);
             return false;
         }
         if (etPassword.getText().length() == 0) {
-            showToast("请输入密码");
+            showToast("请输入密码",0);
             return false;
         }
 
 
         if (!AppUtils.isMobileNO(etPhone.getText().toString())) {
-            showToast("请输入正确的手机号码");
+            showToast("请输入正确的手机号码",0);
             return false;
         }
         return true;
@@ -194,7 +191,7 @@ public class LoginActivity extends BaseActivity{
         super.onResume();
         if ((boolean) SPUtils.get(App.getInstance(), "isNotFindPassword", false)) {
             SPUtils.put(App.getInstance(), "isNotFindPassword", false);
-            showToast("找回密码失败");
+            showToast("找回密码失败",0);
         }
     }
 
@@ -207,19 +204,20 @@ public class LoginActivity extends BaseActivity{
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (App.getInstance().store.size() == 1) {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                exit();
-                return true;
-            }
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    /**退出*/
+
+    /**
+     * 退出
+     */
     public void exit() {
         if ((System.currentTimeMillis() - exitTime) > 2000) {
-            showToast(getString(R.string.then_click_one_exit_procedure));
+            showToast("再按一次退出程序",0);
             exitTime = System.currentTimeMillis();
         } else {
             ActivityManagerUtils.getInstance().exit();
@@ -227,4 +225,5 @@ public class LoginActivity extends BaseActivity{
             System.exit(0);
         }
     }
+
 }

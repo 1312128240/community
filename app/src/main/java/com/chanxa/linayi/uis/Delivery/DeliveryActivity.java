@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.DeliveryListBean;
-import com.chanxa.linayi.tools.AppUtils;
-import com.chanxa.linayi.tools.ToastUtil;
+import com.chanxa.linayi.bean.DeliveryListBean;
+import com.chanxa.linayi.tools.DateTools;
 import com.chanxa.linayi.uis.BaseActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -91,10 +91,8 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
 
                             if(isRefresh){
                                 if(tempList.size()==0){
-                                   // refreshLayout.setVisibility(View.GONE);
                                     emptyView.setVisibility(View.VISIBLE);
                                 }else {
-                                   // refreshLayout.setVisibility(View.VISIBLE);
                                     emptyView.setVisibility(View.GONE);
                                 }
                             }
@@ -102,7 +100,7 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(DeliveryActivity.this,bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -116,7 +114,7 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
             @Override
             protected void convert(ViewHolder holder, final DeliveryListBean.DataBeanX.DataBean deliveryListBean, int position) {
                 //装箱时间
-                String createTime = AppUtils.formatDateNoYear(deliveryListBean.getBoxTime() + "");
+                String createTime =  DateTools.formatDateNoYear(deliveryListBean.getBoxTime() + "");
                 holder.setText(R.id.tv1,createTime);
                 //顾客名字
                 holder.setText(R.id.tv2,deliveryListBean.getReceiverName());
@@ -128,10 +126,12 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
                 holder.getView(R.id.item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(mContext,DeliveryDetailActivity.class);
-                        intent.putExtra("boxNo",deliveryListBean.getBoxNo());
-                        intent.putExtra("ordersId",deliveryListBean.getOrdersId());
-                        startActivity(intent);
+                        if(!TextUtils.isEmpty(deliveryListBean.getBoxNo())){
+                            Intent intent=new Intent(mContext,DeliveryDetailActivity.class);
+                            intent.putExtra("boxNo",deliveryListBean.getBoxNo());
+                            intent.putExtra("ordersId",deliveryListBean.getOrdersId());
+                            startActivity(intent);
+                        }
                     }
                 });
             }
@@ -147,7 +147,7 @@ public class DeliveryActivity extends BaseActivity implements OnRefreshLoadMoreL
                   currentPage++;
                   Refresh(false);
               }else {
-                  ToastUtil.showShort(this,"全部加载完毕");
+                  showToast("全部加载完毕",0);
                   refreshLayout.finishLoadMore();
               }
     }

@@ -1,27 +1,29 @@
 package com.chanxa.linayi.uis.Binning;
 
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.bumptech.glide.Glide;
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.BaseStringBean;
-import com.chanxa.linayi.bean.MyBean.BinningDetailsBean;
-import com.chanxa.linayi.tools.AppUtils;
+import com.chanxa.linayi.bean.BaseStringBean;
+import com.chanxa.linayi.bean.BinningDetailsBean;
+import com.chanxa.linayi.tools.DateTools;
 import com.chanxa.linayi.tools.FormatUtils;
-import com.chanxa.linayi.tools.ToastUtil;
+import com.chanxa.linayi.uis.BaseActivity;
+import com.chanxa.linayi.uis.BrowseImageActivity;
 import com.zhy.adapter.recyclerview.base.ViewHolder;
 
 import org.json.JSONArray;
@@ -35,12 +37,11 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
 
-public class BinningDetailsActivity extends AppCompatActivity{
+public class BinningDetailsActivity extends BaseActivity {
 
    @BindView(R.id.tv_actionbar_title)
     TextView tv_title;
@@ -48,8 +49,6 @@ public class BinningDetailsActivity extends AppCompatActivity{
     RecyclerView recyclerView;
     @BindView(R.id.tv_time)
     TextView tv_time;
-    @BindView(R.id.tv_second_time)
-    TextView tv_second_time;
     @BindView(R.id.tv_ordersId)
     TextView tv_orderId;
     @BindView(R.id.tv_buyer)
@@ -62,17 +61,17 @@ public class BinningDetailsActivity extends AppCompatActivity{
     private List<BinningDetailsBean.DataBean> templist=new ArrayList<>();
     private MyCommonAdapter<BinningDetailsBean.DataBean> adapter;
     private int orderId;
-
+    private Context mContext;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_binning_details);
-        if (Build.VERSION.SDK_INT >=21){
-            getWindow().setStatusBarColor(Color.parseColor("#f6382f"));
-        }
-        ButterKnife.bind(this);
+    public int getLayoutId() {
+        return R.layout.activity_binning_details;
+    }
+
+    @Override
+    public void initView() {
+        mContext=this;
         orderId = getIntent().getIntExtra("orderID",-1);
         tv_title.setText("装箱详情");
         initRecy();
@@ -85,7 +84,7 @@ public class BinningDetailsActivity extends AppCompatActivity{
     }
 
     private void Refresh() {
-        Map<String,String> map=new HashMap<>();
+        final Map<String,String> map=new HashMap<>();
         map.put("ordersId",orderId+"");
         OkhttpUtil
                 .getmIntance()
@@ -104,9 +103,9 @@ public class BinningDetailsActivity extends AppCompatActivity{
                             initHeader(templist);
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
-                                ToastUtil.showShort(BinningDetailsActivity.this,"accessToken失效,请退出重新登录");
+                               showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(BinningDetailsActivity.this,bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -117,17 +116,14 @@ public class BinningDetailsActivity extends AppCompatActivity{
         if(templist.size()>0){
             BinningDetailsBean.DataBean dataBean=templist.get(0);
             //下单时间
-            String createTime = AppUtils.formatDateNoYear(dataBean.getCreateTime() + "");
+            String createTime = DateTools.formatDateNoYear(dataBean.getOrderCreateTime() + "");
             tv_time.setText("下单时间: "+createTime);
-            //剩余时间
-            String updateTime=AppUtils.formatDateNoYear(dataBean.getCreateTime() + "");
-            tv_second_time.setText("剩余时间: "+updateTime);
             //订单编号
             tv_orderId.setText("订单编号: "+dataBean.getOrdersId());
             //收货人
-            tv_buyer.setText("收货人: "+dataBean.getReceiverName());
+            tv_buyer.setText("收  货  人: "+dataBean.getReceiverName());
             //配送地址
-            tv_address.setText("收货地址: "+dataBean.getReceiverAddress());
+            tv_address.setText(dataBean.getReceiverAddress());
         }
 
     }
@@ -138,14 +134,25 @@ public class BinningDetailsActivity extends AppCompatActivity{
         List<BinningDetailsBean.DataBean> list=new ArrayList<>();
         adapter = new MyCommonAdapter<BinningDetailsBean.DataBean>(this,R.layout.item_goods_binning_details_list,list) {
             @Override
-            protected void convert(ViewHolder holder, BinningDetailsBean.DataBean dataBean, int position) {
+            protected void convert(ViewHolder holder,final BinningDetailsBean.DataBean dataBean, int position) {
                 //图片
-                ImageView iv=holder.getView(R.id.iv_goods);
+                final ImageView iv=holder.getView(R.id.iv_goods);
                 Glide.with(mContext).load(dataBean.getGoodsImage()).error(R.drawable.default_error).into(iv);
+
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(BinningDetailsActivity.this,BrowseImageActivity.class);
+                        intent.putExtra("imgUrl",dataBean.getGoodsImage());
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(BinningDetailsActivity.this,iv ,"share");
+                        startActivity(intent,options.toBundle());
+                    }
+                });
+
                 //名字
                 holder.setText(R.id.tv_goods_name,dataBean.getGoodsSkuName());
                 //数量
-                holder.setText(R.id.tv_num,"x"+dataBean.getQuantity());
+                holder.setText(R.id.tv_num,"x"+dataBean.getProcureQuantity());
                 //价格
                 holder.setText(R.id.tv_money,"单价 : ¥"+FormatUtils.format(dataBean.getPrice()+""));
             }
@@ -162,7 +169,7 @@ public class BinningDetailsActivity extends AppCompatActivity{
         String num=et_num.getText().toString();
 
         if(TextUtils.isEmpty(num)){
-            ToastUtil.showShort(this,"请输入箱号");
+            showToast("请输入箱号",0);
             return;
         }
 
@@ -181,10 +188,10 @@ public class BinningDetailsActivity extends AppCompatActivity{
                   @Override
                   public void onResponse(Call call, BaseStringBean bean) {
                       if("S".equals(bean.getRespCode())){
-                          ToastUtil.showShort(BinningDetailsActivity.this,"装箱成功");
+                          showToast("装箱成功",0);
                           finish();
                       }else {
-                          ToastUtil.showShort(BinningDetailsActivity.this,"装箱失败");
+                          showToast("装箱失败",0);
                       }
                   }
               });
@@ -192,7 +199,6 @@ public class BinningDetailsActivity extends AppCompatActivity{
     }
 
     public String ToJson(String num){
-
         JSONArray jsonArray = new JSONArray();
         JSONObject tmpObj = null;
         BinningDetailsBean.DataBean bean;
@@ -204,7 +210,7 @@ public class BinningDetailsActivity extends AppCompatActivity{
                 tmpObj.put("ordersId",bean.getOrdersId());
                 tmpObj.put("procurementTaskId",bean.getProcurementTaskId());
                 tmpObj.put("actualQuantity",bean.getActualQuantity());
-                tmpObj.put("boxNo",Integer.valueOf(num));
+                tmpObj.put("boxNo",num);
                 jsonArray.put(tmpObj);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -218,6 +224,7 @@ public class BinningDetailsActivity extends AppCompatActivity{
     public void back(){
         onBackPressed();
     }
+
 
 
 }

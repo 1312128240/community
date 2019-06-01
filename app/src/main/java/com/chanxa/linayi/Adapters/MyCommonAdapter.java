@@ -13,15 +13,13 @@ import java.util.List;
  * Created by Administrator on 2019/3/29.
  */
 
-public abstract class MyCommonAdapter<T> extends MultiItemTypeAdapter<T>
-{
+public abstract class MyCommonAdapter<T> extends MultiItemTypeAdapter<T>{
     protected Context mContext;
-    protected int mLayoutId;
-    protected List<T> mDatas;
-    protected LayoutInflater mInflater;
+    private int mLayoutId;
+    private List<T> mDatas;
+    private LayoutInflater mInflater;
 
-    public MyCommonAdapter(final Context context, final int layoutId, List<T> datas)
-    {
+    public MyCommonAdapter(final Context context, final int layoutId, List<T> datas) {
         super(context, datas);
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -49,9 +47,12 @@ public abstract class MyCommonAdapter<T> extends MultiItemTypeAdapter<T>
         });
     }
 
-    protected abstract void convert(ViewHolder holder, T t, int position);
 
-
+    /**
+     * 适配器添加数据
+     * @param lists   要添加的数据
+     * @param isClean 是否清除原有数据
+     */
     public void add(List<T>  lists,boolean isClean){
         if(isClean){
             mDatas.clear();
@@ -59,5 +60,12 @@ public abstract class MyCommonAdapter<T> extends MultiItemTypeAdapter<T>
         mDatas.addAll(lists);
         notifyDataSetChanged();
     }
+
+
+
+    protected abstract void convert(ViewHolder holder, T t, int position);
+
+
+
 
 }

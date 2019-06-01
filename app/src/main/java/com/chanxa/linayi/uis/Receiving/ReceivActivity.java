@@ -2,7 +2,9 @@ package com.chanxa.linayi.uis.Receiving;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +14,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.App;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.BaseStringBean;
-import com.chanxa.linayi.bean.MyBean.ReceivBean;
+import com.chanxa.linayi.bean.BaseStringBean;
+import com.chanxa.linayi.bean.ReceivBean;
 import com.chanxa.linayi.tools.FormatUtils;
-import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.BaseActivity;
+import com.chanxa.linayi.uis.BrowseImageActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -73,20 +74,30 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
             @Override
             protected void convert(ViewHolder holder, final ReceivBean.DataBeanX.DataBean dataBean, int position) {
                 //数量
-                holder.setText(R.id.tv_receiv_number,"数量: "+dataBean.getQuantity());
+              //  holder.setText(R.id.tv_receiv_number,"实际下单总数: "+dataBean.getQuantity());
                 //实际采买数量
-                holder.setText(R.id.tv_practical_number,"实际采买数量: "+dataBean.getActualQuantity());
+                holder.setText(R.id.tv_practical_number,"实际采买总数: "+dataBean.getActualQuantity());
                 //金额总计
                 String totalPrice=FormatUtils.format(dataBean.getTotalPrice());
-                holder.setText(R.id.tv_total_price,"金额总计: "+totalPrice);
+                holder.setText(R.id.tv_total_price,"金额总计: ¥"+totalPrice);
                 //图片
-                ImageView iv=holder.getView(R.id.iv_receiv);
+                final ImageView iv=holder.getView(R.id.iv_receiv);
                 Glide.with(mContext).load(dataBean.getGoodsImage()).error(R.drawable.default_error).into(iv);
-               //商品名字
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ReceivActivity.this,BrowseImageActivity.class);
+                        intent.putExtra("imgUrl",dataBean.getGoodsImage());
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(ReceivActivity.this,iv ,"share");
+                        startActivity(intent,options.toBundle());
+                    }
+                });
+
+                //商品名字
                 holder.setText(R.id.tv_receiv_goods_name,dataBean.getFullName());
                 //单价
                String price= FormatUtils.format(dataBean.getPrice()+"");
-               holder.setText(R.id.tv_unit_price,"单价: "+price+"元");
+               holder.setText(R.id.tv_unit_price,"单价: ¥"+price);
                //确定收货
                 holder.getView(R.id.btn_sure_receiv).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -172,7 +183,7 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(ReceivActivity.this,bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -197,13 +208,13 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
                     @Override
                     public void onResponse(Call call, BaseStringBean bean) {
                         if("S".equals(bean.getRespCode())){
-                            ToastUtil.showShort(App.getInstance(),"验货成功");
+                            showToast("验货成功",0);
                             Refresh(true);
                         }else {
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(ReceivActivity.this,bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
                     }
@@ -218,7 +229,7 @@ public class ReceivActivity extends BaseActivity implements OnRefreshLoadMoreLis
             Refresh(false);
         }else {
             refreshlayout.finishLoadMore();
-            ToastUtil.showShort(this,"全部加载完毕");
+            showToast("全部加载完毕",0);
         }
 
     }

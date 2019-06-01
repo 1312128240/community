@@ -9,136 +9,113 @@
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/base_actionbar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        layout="@layout/base_actionbar" />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <RelativeLayout
+        android:id="@+id/rl_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:padding="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/actionbar">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:textColor="@color/black_color"
+            tools:text="下单时间：11-11 11:11" />
 
-            <RelativeLayout
-                android:id="@+id/rl_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white_color"
-                android:padding="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/actionbar">
+        <TextView
+            android:id="@+id/tv_ordersId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:paddingTop="10dp"
+            android:textColor="@color/black_color"
+            tools:text="订单编号：0000" />
 
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="-11.4dp"
-                    android:textColor="@color/black_color"
-                    tools:text="下单时间：11-11 11:11" />
+        <TextView
+            android:id="@+id/tv_buyer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ordersId"
+            android:paddingTop="10dp"
+            android:textColor="@color/black_color"
+            tools:text="收  货  人：张三 1353254862" />
 
-                <TextView
-                    android:id="@+id/tv_ordersId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_time"
-                    android:paddingTop="10dp"
-                    android:textColor="@color/black_color"
-                    tools:text="订单编号：0000" />
+        <TextView
+            android:id="@+id/tv_receiv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_buyer"
+            android:paddingTop="10dp"
+            android:textColor="@color/black_color"
+            android:text="收货地址: " />
 
-                <TextView
-                    android:id="@+id/tv_buyer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_ordersId"
-                    android:layout_marginTop="8.6dp"
-                    android:textColor="@color/black_color"
-                    tools:text="收货人：张三 1353254862" />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_toRightOf="@+id/tv_receiv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_buyer"
+            android:lineSpacingExtra="3dp"
+            android:paddingTop="10dp"
+            android:maxLines="2"
+            android:textColor="@color/black_color"
+            tools:text="泰然九路11号" />
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_buyer"
-                    android:layout_marginTop="8.6dp"
-                    android:lineSpacingExtra="3dp"
-                    android:maxLines="2"
-                    android:textColor="@color/black_color"
-                    tools:text="配送地址：泰然九路11号" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy_binning_details"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/rl_post"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rl_info">
 
-                <TextView
-                    android:id="@+id/tv_second_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:paddingTop="-11.4dp"
-                    android:textColor="@color/black_color"
-                    tools:text="剩余时间：00:11:11" />
-            </RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recy_binning_details"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rl_info">
+    <RelativeLayout
+        android:id="@+id/rl_post"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
-            </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="74.4dp"
+            android:layout_height="27.8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ll"
+            android:layout_marginBottom="10.4dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/button_bg_5_rob"
+            android:gravity="center"
+            android:text="确认装箱"
+            android:textColor="@color/theme_color"
+            tools:ignore="UnknownIdInLayout" />
 
-
-            <RelativeLayout
-                android:id="@+id/rl_post"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:background="@color/white_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_confirm"
-                    android:layout_width="74.4dp"
-                    android:layout_height="27.8dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/ll"
-                    android:layout_marginBottom="10.4dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="11dp"
-                    android:background="@drawable/button_bg_5_rob"
-                    android:gravity="center"
-                    android:text="确认装箱"
-                    android:textColor="@color/theme_color"
-                    tools:ignore="UnknownIdInLayout" />
-
-                <EditText
-                    android:id="@+id/et_box_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="11.5dp"
-                    android:layout_marginRight="11.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toLeftOf="@id/tv_confirm"
-                    android:hint="请输入箱子编号"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:textColorHint="@color/text_gray"
-                    android:textSize="15sp" />
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
+        <EditText
+            android:id="@+id/et_box_num"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="11.5dp"
+            android:layout_marginRight="11.5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@id/tv_confirm"
+            android:hint="请输入箱子编号"
+            android:textColorHint="@color/text_gray"
+            android:textSize="15sp" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

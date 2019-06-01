@@ -20,9 +20,9 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="-11.4dp"
             tools:text="下单时间：11-11 11:11"
             android:textColor="@color/black_color" />
+
         <TextView
             android:id="@+id/tv_ordersId"
             android:layout_width="wrap_content"
@@ -37,20 +37,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_ordersId"
-            android:layout_marginTop="8.6dp"
-            tools:text="收货人：张三 1353254862"
+            android:paddingTop="10dp"
+            tools:text="收  货  人：张三 1353254862"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/tv_delivery_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_buyer"
+            android:paddingTop="10dp"
+            android:text="配送地址: "
             android:textColor="@color/black_color" />
 
         <TextView
             android:id="@+id/tv_address"
+            android:layout_toRightOf="@+id/tv_delivery_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_buyer"
-            android:layout_marginTop="8.6dp"
-            android:layout_marginBottom="8.6dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:lineSpacingExtra="3dp"
             android:maxLines="2"
-            tools:text="配送地址：泰然九路11号"
+            android:text="召唤师峡谷"
             android:textColor="@color/black_color" />
 
         <TextView
@@ -58,7 +68,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:paddingTop="-11.4dp"
             tools:text="剩余时间：00:11:11"
             android:textColor="@color/black_color" />
 
@@ -69,6 +78,7 @@
             android:layout_height="wrap_content"
             tools:text="配送箱号：0000"
             android:textColor="@color/black_color" />
+
         <TextView
             android:id="@+id/tv_goods_num"
             android:layout_centerHorizontal="true"

@@ -3,6 +3,7 @@ package com.chanxa.linayi.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,8 @@ import com.chanxa.linayi.uis.Delivery.DeliveryActivity;
 import com.chanxa.linayi.uis.Order.OrderStatusActivity;
 import com.chanxa.linayi.uis.Personal.SettingActivity;
 import com.chanxa.linayi.uis.Receiving.ReceivActivity;
-import com.chanxa.linayi.uis.Receiving.ReceivingActivity;
 import com.chanxa.linayi.uis.Task.TaskHomeActivity;
+import com.example.uhf.activity.UHFMainActivity;
 
 
 /**
@@ -26,24 +27,28 @@ import com.chanxa.linayi.uis.Task.TaskHomeActivity;
 public class HomeRcvAdapter extends RecyclerView.Adapter<HomeRcvAdapter.MyViewHolder> {
 
     private Context mContext;
+    private String[] names;
+    private int [] drawableArrays;
 
+   // private String [] names={"订单","任务","收货","装箱","配送","账号设置"};
 
-    private int[] names ={R.string.home_order, R.string.home_task, R.string.home_goods_receipt,
-            R.string.home_packing, R.string.home_goods_send, R.string.home_account_number,
-    };
+  //  private String [] names={"订单","任务","收货","装箱","配送","账号设置","UHF"};
 
-    private int [] drawableArrays={
+   /* private int [] drawableArrays={
             R.drawable.icon_home_order,
             R.drawable.icon_home_task,
             R.drawable.icon_home_goods_receiving,
             R.drawable.icon_home_packing,
             R.drawable.icon_home_goods_receipt,
             R.drawable.icon_home_account_number,
-    };
+            R.mipmap.ic_launcher
+    };*/
 
 
-    public HomeRcvAdapter(Context context) {
+    public HomeRcvAdapter(Context context,String[] names,int[] drawable) {
         this.mContext = context;
+        this.names=names;
+        this.drawableArrays=drawable;
     }
 
     @Override
@@ -63,15 +68,12 @@ public class HomeRcvAdapter extends RecyclerView.Adapter<HomeRcvAdapter.MyViewHo
            public void onClick(View view) {
                switch (position) {
                    case 0:
-                     //  mContext.startActivity(new android.content.Intent(mContext,OrderActivity.class));
-                     mContext.startActivity(new Intent(mContext, OrderStatusActivity.class));
+                       mContext.startActivity(new Intent(mContext, OrderStatusActivity.class));
                        break;
                    case 1:
-                       //  mContext.startActivity(new android.content.Intent(mContext, TaskActivity.class));
                        mContext.startActivity(new Intent(mContext, TaskHomeActivity.class));
                        break;
                    case 2:
-                     //  mContext.startActivity(new Intent(mContext, ReceivingActivity.class));
                        mContext.startActivity(new Intent(mContext,ReceivActivity.class));
                        break;
                    case 3: //装箱
@@ -82,6 +84,9 @@ public class HomeRcvAdapter extends RecyclerView.Adapter<HomeRcvAdapter.MyViewHo
                       break;
                   case 5:
                        mContext.startActivity(new Intent(mContext, SettingActivity.class));
+                       break;
+                   case 6:
+                       mContext.startActivity(new Intent(mContext,UHFMainActivity.class));
                        break;
                }
            }

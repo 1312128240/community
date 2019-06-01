@@ -3,7 +3,8 @@ package com.chanxa.linayi.manager;
 import android.content.Context;
 import android.util.Log;
 
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+
+import com.chanxa.linayi.HttpClient.ApiResponse;
 import com.google.gson.Gson;
 
 import org.apache.http.util.EncodingUtils;

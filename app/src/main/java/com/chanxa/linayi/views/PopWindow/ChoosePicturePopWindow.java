@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -70,7 +71,6 @@ public class ChoosePicturePopWindow extends PopupWindow implements View.OnClickL
         setHeight(FrameLayout.LayoutParams.MATCH_PARENT);
         setWidth(FrameLayout.LayoutParams.MATCH_PARENT);
         setFocusable(true);
-        setClippingEnabled(false);
         setBackgroundDrawable(new ColorDrawable(0x70000000));
         setAnimationStyle(R.style.ActionSheetDialogAnimation);
 

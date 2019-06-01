@@ -1,6 +1,4 @@
-package com.chanxa.linayi.views;/**
- * Created by CHANXA on 2015/7/6.
- */
+package com.chanxa.linayi.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;

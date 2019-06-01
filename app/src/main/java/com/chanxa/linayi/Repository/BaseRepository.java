@@ -7,16 +7,16 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.chanxa.linayi.App;
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+import com.chanxa.linayi.HttpClient.ApiResponse;
 import com.chanxa.linayi.Interface.RequestFailListener;
 import com.chanxa.linayi.Interface.RequestListener;
 import com.chanxa.linayi.manager.CallHttpManager;
 import com.chanxa.linayi.manager.LocalManager;
 import com.chanxa.linayi.tools.AppUtils;
 import com.chanxa.linayi.tools.SPUtils;
-import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.login.LoginActivity;
 
 import java.io.File;
@@ -52,7 +52,7 @@ public class BaseRepository {
         this.url = url;
     }
 
-   public void post(Map<String, Object> param, Class<?> tClass, final RequestListener requestListener) {
+    public void post(Map<String, Object> param, Class<?> tClass, final RequestListener requestListener) {
 
         if (App.getInstance().getIsLocal()) {
             //成功
@@ -132,11 +132,11 @@ public class BaseRepository {
                             if (apiResponse.getErrCode() == 2008){
 
                             }else {
-                                ToastUtil.showShort(context, apiResponse.getErrMsg());
+                                Toast.makeText(context,apiResponse.getErrMsg(),Toast.LENGTH_SHORT).show();
                             }
                             Log.e("BaseRepository", "handleMessage: " + apiResponse.getErrMsg());
                         } else {
-                            ToastUtil.showShort(context, "登陆失效！请重新登录");
+                            Toast.makeText(context,"登陆失效！请重新登录",Toast.LENGTH_SHORT).show();
 //                            记住未登录
                             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                 @Override

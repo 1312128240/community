@@ -9,12 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chanxa.linayi.Adapters.MyCommonAdapter;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
-import com.chanxa.linayi.HttpClient.okhttp.ResultCallback;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.ResultCallback;
 import com.chanxa.linayi.R;
-import com.chanxa.linayi.bean.MyBean.AllOrderBean;
-import com.chanxa.linayi.tools.ToastUtil;
-import com.chanxa.linayi.uis.Order.OrderDetailNewActivity;
+import com.chanxa.linayi.bean.AllOrderBean;
+import com.chanxa.linayi.uis.Order.OrderDetailsActivity;
 import com.chanxa.linayi.uis.Order.OrderStatusActivity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -81,7 +80,7 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
                 holder.getView(R.id.item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent=new Intent(getActivity(), OrderDetailNewActivity.class);
+                        Intent intent=new Intent(getActivity(),OrderDetailsActivity.class);
                         intent.putExtra("ordersId",dataBean.getOrdersId());
                         startActivity(intent);
                     }
@@ -99,10 +98,12 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
 
 
 
+
     private void Refresh(final boolean isRefresh) {
 
         Map<String,String> map=new HashMap<>();
         map.put("communityStatus","ALL");
+        map.put("communityName","community");
         map.put("currentPage",currentPage+"");
         map.put("pageSize",10+"");
         OkhttpUtil
@@ -113,7 +114,8 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
                     public void onFailure(Call call, IOException e) {
                         refreshlayout.finishLoadMore();
                         refreshlayout.finishRefresh();
-                        ToastUtil.showShort(getContext(),e.toString());
+                        showToast(e.toString(),0);
+                      //  ToastUtil.showShort(getContext(),e.toString());
                     }
 
                     @Override
@@ -139,7 +141,7 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
                             if(bean.getErrorMsg().contains("accessToken失效")){
                                 orderStatusActivity.showLogOutDialog();
                             }else {
-                                ToastUtil.showShort(getContext(),bean.getErrorMsg());
+                                showToast(bean.getErrorMsg(),0);
                             }
                         }
 
@@ -154,7 +156,7 @@ public class AllOrderFragment extends BaseFragments implements OnRefreshLoadMore
                        Refresh(false);
                    }else {
                        refreshlayout.finishLoadMore();
-                       ToastUtil.showShort(getContext(),"全部加载完毕");
+                       showToast("全部加载完毕",0);
                    }
     }
 

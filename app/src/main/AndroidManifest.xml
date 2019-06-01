@@ -1,54 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.chanxa.linayi">
 
-    <!-- Required  一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="com.chanxa.chookr.permission.JPUSH_MESSAGE" />
+    <!--系统权限-->
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- Optional for location -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <!-- ******************************极光推送结束********************************** -->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
-
-    <!-- ****************************腾讯Bugly开始************************************* -->
+    <!-- ****************************腾讯Bugly所需权限************************************* -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <!-- ****************************腾讯Bugly结束************************************* -->
-
-
-    <!-- ****************************版本更新权限开始************************************* -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
-    <!-- ****************************版本更新权限结束************************************* -->
     <application
         android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
-        android:label="@string/app_name"
+        android:label="邻阿姨社区端"
         android:roundIcon="@mipmap/start"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:label">
+
+        <!-- 下载更新广播 -->
+        <receiver android:name=".tools.ApkInstall.ApkInstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <!--下载安装apk对路径临时授权,自己写升级功能专用 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.chanxa.linayi.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!--bug升级安装权限-->
+        <provider
+            android:name=".tools.BuglyFileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"
+                tools:replace="name,resource"/>
+        </provider>
+
+        <!--main-->
+        <activity
+            android:name=".uis.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 登录 -->
         <activity android:name=".uis.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,12 +83,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".uis.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
 
-        <!-- 个人设置,找加密码 -->
+        <!-- 个人设置,找密码 -->
         <activity
             android:name=".uis.login.FindPasswordActivity"
             android:launchMode="singleTask"
@@ -76,10 +99,7 @@
             android:name=".uis.Order.OrderStatusActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.Order.OrderDetailNewActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+        <activity android:name=".uis.Order.OrderDetailsActivity" />
 
         <!-- 任务 -->
         <activity
@@ -94,15 +114,9 @@
             android:name=".uis.Task.TaskProcurementkDetailActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <!-- 收贷 -->
-        <activity
-            android:name=".uis.Receiving.ReceivingActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".uis.Receiving.GoodsReceivingDetailsActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+
+        <!-- 收货 -->
+        <activity android:name=".uis.Receiving.ReceivActivity" />
 
         <!-- 装箱 -->
         <activity
@@ -130,18 +144,28 @@
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="standard" />
+
+        <activity
+            android:name=".uis.BrowseImageActivity"
+            android:launchMode="singleTask" />
+
         <activity
             android:name=".uis.ZoomActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <intent-filter >
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".uis.Receiving.ReceivActivity"></activity>
+
+
+        <!-- bugly全量更新 -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
     </application>
 
 </manifest>

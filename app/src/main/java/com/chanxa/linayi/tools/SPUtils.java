@@ -13,29 +13,11 @@ public class SPUtils {
      * 保存在手机里面的文件名
      */
     public static final String FILE_NAME = "Choor";
-    public final static String IS_FIRST = "isOne";//1第一次，2不是
-    public final static String IS_GUIDE = "isGuide";//是否已经引导，true已经引导
     public final static String USER_MOBILE = "user_mobile";
-    public final static String USER_EMAIL = "user_email";
-    public final static String PUSH_TOKEN = "pushToken";
     public final static String IS_LOGIN = "isLogin";//true已登录，false未登录
     public final static String PASSWORD = "password";
-    public final static String TAG_CACHE_FILE_NAME = "tagCacheFileName";
-    public final static String IS_DEBUG_MODE = "isDebugMode";
-    public final static String IS_NEW_VERSION = "isNewVersion";
-    public final static String LANGUAGE_CODE = "language_code";//语言code,简体CN,繁体中文TW,英文EN
-    public final static String SYSTEM_LANGUAGE_CODE = "system_language_code";//系统语言code,简体CN,繁体中文TW,英文EN
-    public final static String WEIGHT_UNIT = "weight_unit";//重量单位code,克gram，盎司oz
-    public final static String TEMPERATURE_UNIT = "temperature_unit";//温度单位code,摄氏度celsius，华氏度fahrenheit
-    public final static String VOICE_REMIND_SWITCH = "voice_remind_switch";//声音提醒开关，1开，2关
     public final static String IS_LOGIN_OUT = "is_login_out";//是否退出登录,true退出登录，false不是
     public final static String ACCESSTOKEN = "accessToken";//登录令牌
-    public final static String IS_TODAY = "is_today";
-    public final static String IS_FIRST_MAIN = "is_first_main";
-    public final static String IS_FIRST_PUSH = "is_first_push";
-    public final static String DEVICE_UP_POWER = "device_up_power"; //电量相关
-    public final static String IS_TIPS_TODAY = "is_tips_today";//电量提示相关，记录弹过的日期，一天只弹一次电量
-    public final static String USER_ID = "user_id";
 
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
@@ -215,62 +197,6 @@ public class SPUtils {
         put(context, PASSWORD, pwd);
     }
 
-    public static boolean getIsNewVersion(Context context) {
-        String isLogin = (String) get(context, IS_NEW_VERSION, "0");
-        return isLogin.equals("1");
-    }
-
-    public static void setIsNewVersion(Context context, boolean isNewVersion) {
-        put(context, IS_NEW_VERSION, isNewVersion ? "1" : "0");
-    }
-
-    public static boolean getIsDebugMode(Context context) {
-        String isLogin = (String) get(context, IS_DEBUG_MODE, "0");
-        return isLogin.equals("1");
-    }
-
-    public static void setIsDebugMode(Context context, boolean isDebug) {
-        put(context, IS_DEBUG_MODE, isDebug ? "1" : "0");
-    }
-
-    //获取App语言
-    public static String getLanguageCode(Context context) {
-        return (String) get(context, LANGUAGE_CODE, "ZH");
-    }
-
-    public static String getWeightUnit(Context context) {
-        return (String) get(context, WEIGHT_UNIT, "g");
-    }
-
-    public static String getTemperature(Context context, String de) {
-        return (String) get(context, TEMPERATURE_UNIT, de);
-    }
-
-    public static String getIsToday(Context context, String de) {
-        return (String) get(context, IS_TODAY, de);
-    }
-
-    public static boolean getIsFirstMain(Context context) {
-        boolean firstMain = (boolean) get(context, IS_FIRST_MAIN, true);
-        return firstMain;
-    }
-
-    public static void setIsFirstMain(Context context, boolean firstMain) {
-        put(context, IS_FIRST_MAIN, firstMain);
-    }
-
-    public static boolean getIsFirstPush(Context context) {
-        boolean firstPush = (boolean) get(context, IS_FIRST_PUSH, true);
-        return firstPush;
-    }
-
-    public static void setIsFirstPush(Context context, boolean isFirstPush) {
-        put(context, IS_FIRST_PUSH, isFirstPush);
-    }
-
-    public static String getSystemLanguageCode(Context context) {
-        return (String) get(context, SYSTEM_LANGUAGE_CODE, "ZH");
-    }
 
     public static void setCommunityAccountId (Context context, String user_id){
         put(context, "communityAccountId", user_id);

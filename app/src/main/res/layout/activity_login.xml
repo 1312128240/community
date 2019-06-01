@@ -120,7 +120,7 @@
         android:layout_below="@+id/ll_password"
         android:layout_toRightOf="@+id/iv_click"
         android:paddingLeft="14dp"
-        android:paddingTop="3dp"
+        android:paddingTop="2dp"
         android:text="@string/remember_password"
         android:textColor="@color/order_item_detail_text_n" />
 
@@ -148,6 +148,5 @@
         android:padding="15dp"
         android:text="登录"
         android:textColor="@color/white_color" />
-
 
 </RelativeLayout>

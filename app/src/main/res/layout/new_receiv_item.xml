@@ -6,39 +6,15 @@
     android:background="#FFFFFF"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_receiv_number"
-        android:textColor="@android:color/black"
-        tools:text="数量x1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/tv_practical_number"
-        android:textColor="@android:color/black"
-        android:layout_alignParentRight="true"
-        tools:text="实际采买数量: 1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/tv_total_price"
-        android:textColor="@android:color/black"
-        tools:text="金额总计: 6.1"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_practical_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <ImageView
         android:id="@+id/iv_receiv"
+        android:scaleType="fitXY"
+        android:background="@drawable/iv_border"
+        android:transitionName="share"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/tv_total_price"
         tools:src="@drawable/ic_launcher"
-        android:layout_width="95dp"
-        android:layout_height="100dp" />
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
 
     <TextView
         android:id="@+id/tv_receiv_goods_name"
@@ -51,13 +27,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
+    <TextView
+        android:id="@+id/tv_practical_number"
+        android:layout_alignTop="@+id/iv_receiv"
+        android:textColor="@android:color/black"
+        android:layout_alignParentRight="true"
+        tools:text="实际采买数量: 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tv_total_price"
+        android:textColor="@android:color/black"
+        tools:text="金额总计¥:  6.1"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_practical_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
      <TextView
          android:id="@+id/tv_unit_price"
          android:layout_below="@+id/tv_receiv_goods_name"
          android:textColor="@android:color/black"
          android:layout_toRightOf="@+id/iv_receiv"
          android:paddingBottom="5dp"
-         tools:text="单价:6.1"
+         tools:text="单价¥:6.1"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
 

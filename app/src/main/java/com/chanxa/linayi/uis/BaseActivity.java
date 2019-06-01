@@ -9,19 +9,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.chanxa.linayi.App;
-import com.chanxa.linayi.HttpClient.okhttp.OkhttpUtil;
+import com.chanxa.linayi.HttpClient.OkhttpUtil;
 import com.chanxa.linayi.R;
 import com.chanxa.linayi.tools.ActivityManagerUtils;
 import com.chanxa.linayi.tools.DialogUtils;
 import com.chanxa.linayi.tools.SPUtils;
-import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.login.LoginActivity;
 
 import butterknife.ButterKnife;
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 
 
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private Dialog mDialog;
     private Context mContext;
@@ -93,9 +92,10 @@ public abstract class BaseActivity extends FragmentActivity {
         }
     }
 
-    public void showToast(String msg){
-        ToastUtil.showLong(this, msg);
+    protected void showToast(String msg,int i) {
+        Toast.makeText(this, msg, i).show();
     }
+
 
     public void hideSortInput(View view){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -124,6 +124,9 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
 
+    /**
+     * token失效时，提示对话框
+     */
     public void showLogOutDialog(){
         if(!isFirst){
             logoutDialog = new AlertDialog.Builder(this);
@@ -150,7 +153,6 @@ public abstract class BaseActivity extends FragmentActivity {
                 }
             }).create().show();
             isFirst=true;
-
         }
     }
 

@@ -9,14 +9,12 @@ import android.util.Log;
 
 import com.chanxa.linayi.R;
 import com.chanxa.linayi.tools.CreatFileUtils;
-import com.chanxa.linayi.tools.DataUtils;
-import com.chanxa.linayi.tools.ToastUtil;
+import com.chanxa.linayi.tools.DateTools;
 import com.kevin.crop.UCrop;
 import com.kevin.crop.util.BitmapLoadUtils;
 import com.kevin.crop.view.GestureCropImageView;
 import com.kevin.crop.view.OverlayView;
 import com.kevin.crop.view.UCropView;
-
 
 import java.io.File;
 import java.io.OutputStream;
@@ -93,7 +91,10 @@ public class ZoomActivity extends BaseActivity{
 
     private void setImageData(Intent intent) {
 
-        mOutputUri = Uri.fromFile(CreatFileUtils.changeFile(CreatFileUtils.getPhotoPath(), DataUtils.getCurrentDate() + ".jpg"));
+
+
+       // mOutputUri = Uri.fromFile(CreatFileUtils.changeFile(CreatFileUtils.getPhotoPath(), DataUtils.getCurrentDate() + ".jpg"));
+        mOutputUri = Uri.fromFile(CreatFileUtils.changeFile(CreatFileUtils.getPhotoPath(),  DateTools.getCurrentDate("yyyy_MM_dd_HHmmss") + ".jpg"));
         if (intent != null) {
             url = intent.getStringExtra(ZOOM_URL);
         }
@@ -138,7 +139,7 @@ public class ZoomActivity extends BaseActivity{
         try {
             cropAndSaveImage();
         } catch (IllegalArgumentException e) {
-            ToastUtil.showShort(ZoomActivity.this, "方框不能移动到屏幕外！");
+            Log.e("错误","方框不能移动到屏幕外！");
         }
     }
 
@@ -160,6 +161,7 @@ public class ZoomActivity extends BaseActivity{
                 intent.setAction("Pic");
                 intent.putExtra("uri",mOutputUri.getPath());
                 sendBroadcast(intent);
+                finish();
             } else {
                 finish();
             }

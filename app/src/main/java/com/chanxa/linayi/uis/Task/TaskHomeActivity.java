@@ -1,23 +1,16 @@
 package com.chanxa.linayi.uis.Task;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chanxa.linayi.R;
 import com.chanxa.linayi.fragments.TaskOverFragment;
 import com.chanxa.linayi.fragments.TaskingFragment;
-import com.chanxa.linayi.tools.ToastUtil;
 import com.chanxa.linayi.uis.BaseActivity;
 
 import java.util.ArrayList;

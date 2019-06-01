@@ -1,14 +1,14 @@
 
 package com.chanxa.linayi.bean;
 
-import com.chanxa.linayi.HttpClient.api.ApiResponse;
+
+import com.chanxa.linayi.HttpClient.ApiResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 
 public class UserEntity extends ApiResponse implements Serializable {
-
 
     public DataBean getData() {
         return data;
